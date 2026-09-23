@@ -141,7 +141,7 @@ def main():
     parser = argparse.ArgumentParser(description="Generador de Códigos QR para Árboles de Jipijapa")
     parser.add_argument(
         '--url',
-        default="https://pincaydamian99-lab.github.io/plantas_jipi/ficha.html?id=",
+        default="https://plantas-jipi.vercel.app/ficha.html?id=",
         help="URL base para los códigos QR"
     )
     args = parser.parse_args()
