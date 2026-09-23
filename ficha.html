@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Ficha Informativa Arbórea - GAD Municipal de Jipijapa</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,13 +36,14 @@
       color: var(--text-dark);
       line-height: 1.5;
       padding-bottom: 60px;
+      overflow-x: hidden;
     }
 
-    /* Institutional Header */
+    /* Top Institutional Header */
     .top-bar {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: white;
-      padding: 14px 20px;
+      padding: 12px 16px;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -56,16 +57,17 @@
     .top-bar-brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-decoration: none;
       color: white;
+      min-width: 0;
     }
 
     .flag-pill {
       display: flex;
-      height: 28px;
-      width: 8px;
-      border-radius: 4px;
+      height: 26px;
+      width: 6px;
+      border-radius: 3px;
       overflow: hidden;
       flex-direction: column;
       flex-shrink: 0;
@@ -73,68 +75,78 @@
     .flag-green { background: #007A3D; flex: 1; }
     .flag-red { background: #E31837; flex: 1; }
 
-    .top-bar-title h1 {
-      font-size: 0.95rem;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      line-height: 1.2;
-      text-transform: uppercase;
+    .top-bar-title {
+      min-width: 0;
     }
-
+    .top-bar-title h1 {
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      line-height: 1.15;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .top-bar-title p {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       color: #FDE047;
       font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .btn-gallery-back {
       background: rgba(255,255,255,0.18);
       color: white;
       text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 12px;
-      font-size: 0.8rem;
+      padding: 7px 12px;
+      border-radius: 10px;
+      font-size: 0.78rem;
       font-weight: 700;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       border: 1px solid rgba(255,255,255,0.3);
+      flex-shrink: 0;
       transition: all 0.2s;
     }
     .btn-gallery-back:hover { background: rgba(255,255,255,0.3); }
 
     /* Centered Container */
     .main-container {
-      max-width: 720px;
-      margin: 24px auto;
-      padding: 0 16px;
+      max-width: 680px;
+      margin: 16px auto;
+      padding: 0 12px;
     }
 
-    /* View Switcher Tabs (Ficha Oficial vs Resumen Interactivo) */
+    /* Responsive Tab Switcher */
     .tab-switcher {
       display: flex;
       background: #E2E8F0;
       padding: 4px;
       border-radius: 14px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       gap: 4px;
     }
 
     .tab-btn {
       flex: 1;
-      padding: 10px 14px;
+      padding: 9px 8px;
       border-radius: 10px;
       border: none;
       background: transparent;
       color: var(--text-muted);
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       transition: all 0.2s;
+      white-space: nowrap;
     }
 
     .tab-btn.active {
@@ -152,75 +164,95 @@
       overflow: hidden;
     }
 
-    /* TAB 1: FICHA OFICIAL ESCANEADA (ORIGINAL) */
+    /* --- VISTA 1: FICHA OFICIAL ESCANEADA --- */
     .official-doc-view {
-      padding: 20px;
+      padding: 16px 14px 20px;
       text-align: center;
     }
 
     .official-doc-header {
-      margin-bottom: 16px;
-      text-align: center;
+      margin-bottom: 12px;
     }
 
     .doc-badge-pill {
       display: inline-block;
       background: #DCFCE7;
       color: #15803D;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 800;
-      padding: 4px 14px;
+      padding: 3px 12px;
       border-radius: 20px;
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .official-doc-title {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 800;
       color: var(--text-dark);
+      line-height: 1.2;
     }
 
     .official-img-wrapper {
       position: relative;
       background: #0F172A;
-      border-radius: 14px;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
       border: 1px solid var(--border-color);
-      margin-bottom: 16px;
+      margin: 12px 0 16px;
+      cursor: zoom-in;
     }
 
     .official-sheet-img {
       width: 100%;
       height: auto;
       display: block;
-      transition: transform 0.3s;
-      cursor: zoom-in;
+      transition: transform 0.2s ease;
+    }
+
+    .hint-tap-zoom {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.82);
+      backdrop-filter: blur(4px);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
     }
 
     .doc-actions-row {
       display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .btn-doc-action {
       background: white;
       color: var(--text-dark);
       border: 1.5px solid var(--border-color);
-      padding: 10px 18px;
-      border-radius: 10px;
-      font-size: 0.85rem;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 0.88rem;
       font-weight: 700;
       text-decoration: none;
       cursor: pointer;
-      display: inline-flex;
+      display: flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       transition: all 0.2s;
+      width: 100%;
     }
     .btn-doc-action:hover {
       background: #F8FAFC;
@@ -230,16 +262,17 @@
       background: var(--primary);
       color: white;
       border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(0, 122, 61, 0.25);
     }
     .btn-doc-action.primary:hover {
       background: var(--primary-dark);
     }
 
-    /* TAB 2: FICHA RESUMEN INTERACTIVA (Como la segunda imagen) */
+    /* --- VISTA 2: FICHA MÓVIL INTERACTIVA --- */
     .tree-photo-container {
       position: relative;
       width: 100%;
-      height: 320px;
+      height: 280px;
       background: #E2E8F0;
       overflow: hidden;
     }
@@ -253,14 +286,14 @@
 
     .badge-code {
       position: absolute;
-      top: 16px;
-      left: 16px;
+      top: 12px;
+      left: 12px;
       background: rgba(15, 23, 42, 0.88);
       backdrop-filter: blur(8px);
       color: white;
-      padding: 6px 16px;
+      padding: 5px 14px;
       border-radius: 30px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 800;
       letter-spacing: 0.5px;
       border: 1px solid rgba(255,255,255,0.25);
@@ -268,11 +301,11 @@
 
     .badge-origin {
       position: absolute;
-      top: 16px;
-      right: 16px;
-      padding: 6px 16px;
+      top: 12px;
+      right: 12px;
+      padding: 5px 14px;
       border-radius: 30px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -283,58 +316,58 @@
 
     .btn-view-ficha-pill {
       position: absolute;
-      bottom: 14px;
-      right: 14px;
+      bottom: 12px;
+      right: 12px;
       background: rgba(255,255,255,0.95);
       color: var(--primary-dark);
-      padding: 8px 16px;
+      padding: 7px 14px;
       border-radius: 12px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 800;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       cursor: pointer;
       border: none;
     }
 
     .card-body {
-      padding: 26px 24px;
+      padding: 20px 16px;
     }
 
     .tree-title-group {
       text-align: center;
-      margin-bottom: 22px;
-      padding-bottom: 18px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
       border-bottom: 2px solid #F1F5F9;
     }
 
     .label-common-name {
       display: inline-block;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       color: var(--primary);
       background: var(--primary-light);
-      padding: 5px 14px;
+      padding: 4px 12px;
       border-radius: 20px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .tree-name {
-      font-size: 2.2rem;
+      font-size: 1.85rem;
       font-weight: 800;
       color: var(--text-dark);
       line-height: 1.15;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .scientific-name {
       font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
-      font-size: 1.3rem;
+      font-size: 1.15rem;
       color: var(--text-muted);
     }
 
@@ -342,62 +375,61 @@
     .audio-action-container {
       display: flex;
       justify-content: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .btn-audio {
       background: linear-gradient(135deg, #059669, #047857);
       color: white;
       border: none;
-      padding: 13px 28px;
+      padding: 12px 24px;
       border-radius: 30px;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      box-shadow: 0 6px 18px rgba(5, 150, 105, 0.35);
+      gap: 8px;
+      box-shadow: 0 5px 15px rgba(5, 150, 105, 0.35);
       transition: all 0.2s;
-    }
-    .btn-audio:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 22px rgba(5, 150, 105, 0.45);
+      width: 100%;
+      max-width: 340px;
+      justify-content: center;
     }
     .btn-audio.playing {
       background: linear-gradient(135deg, #EF4444, #DC2626);
-      box-shadow: 0 6px 18px rgba(239, 68, 68, 0.35);
+      box-shadow: 0 5px 15px rgba(239, 68, 68, 0.35);
     }
 
     /* Information Cards Grid */
     .info-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      margin-bottom: 22px;
+      gap: 10px;
+      margin-bottom: 18px;
     }
 
     .info-item {
       background: #F8FAFC;
       border: 1.5px solid var(--border-color);
-      padding: 16px;
-      border-radius: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
     }
 
     .info-item-label {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 800;
       text-transform: uppercase;
       color: var(--text-muted);
-      letter-spacing: 0.6px;
-      margin-bottom: 4px;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
     .info-item-value {
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: var(--text-dark);
       word-break: break-word;
@@ -407,9 +439,9 @@
       display: inline-block;
       background: #DCFCE7;
       color: #15803D;
-      padding: 3px 12px;
+      padding: 2px 10px;
       border-radius: 20px;
-      font-size: 0.9rem;
+      font-size: 0.82rem;
       font-weight: 700;
     }
 
@@ -417,36 +449,36 @@
     .description-box {
       background: #F0FDF4;
       border: 1.5px solid #BBF7D0;
-      border-radius: 14px;
-      padding: 18px;
-      margin-bottom: 22px;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 18px;
       color: #166534;
-      font-size: 0.95rem;
-      line-height: 1.6;
+      font-size: 0.88rem;
+      line-height: 1.55;
     }
 
     .description-box h3 {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-bottom: 8px;
+      letter-spacing: 0.6px;
+      margin-bottom: 6px;
       font-weight: 800;
       color: #15803D;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     /* Location & Map */
     .location-box {
       background: #EFF6FF;
       border: 1.5px solid #BFDBFE;
-      border-radius: 14px;
-      padding: 18px;
-      margin-bottom: 22px;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 18px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
     .location-header {
@@ -454,15 +486,15 @@
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
     }
 
     .location-title {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 800;
       color: #1E40AF;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.6px;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -472,9 +504,9 @@
       background: #2563EB;
       color: white;
       text-decoration: none;
-      padding: 10px 18px;
+      padding: 10px 16px;
       border-radius: 10px;
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       font-weight: 700;
       display: inline-flex;
       align-items: center;
@@ -482,55 +514,50 @@
       gap: 8px;
       transition: background 0.2s;
     }
-    .btn-maps:hover { background: #1D4ED8; }
 
-    /* Technical Signature Box */
     .responsible-box {
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
       background: #F8FAFC;
       border: 1px solid var(--border-color);
-      padding: 12px 16px;
-      border-radius: 12px;
-      margin-bottom: 22px;
-      line-height: 1.5;
+      padding: 10px 12px;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      line-height: 1.45;
     }
     .responsible-box strong { color: var(--text-dark); }
 
-    /* Navigation Arrows & Dropdown */
+    /* Navigation */
     .nav-container {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       margin-top: 14px;
     }
 
     .nav-trees {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
 
     .nav-btn {
-      flex: 1;
-      padding: 12px 14px;
+      padding: 11px 10px;
       background: white;
       border: 1.5px solid var(--border-color);
       border-radius: 12px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 700;
       color: var(--text-dark);
       text-decoration: none;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 4px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-      transition: all 0.2s;
-    }
-    .nav-btn:hover {
-      background: #F1F5F9;
-      border-color: #94A3B8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .tree-select-wrap {
@@ -539,12 +566,12 @@
       gap: 8px;
       background: white;
       border: 1.5px solid var(--border-color);
-      padding: 10px 14px;
+      padding: 8px 12px;
       border-radius: 12px;
     }
 
     .tree-select-wrap label {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 700;
       color: var(--text-muted);
       white-space: nowrap;
@@ -552,81 +579,196 @@
 
     .tree-select {
       flex: 1;
-      padding: 6px 10px;
+      padding: 6px 8px;
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       font-weight: 600;
       color: var(--text-dark);
       background: #F8FAFC;
       outline: none;
+      min-width: 0;
     }
 
-    /* Modal for Image Fullscreen */
-    .modal {
+    /* ========================================================
+       MODAL DE PANTALLA COMPLETA CON ROTACIÓN INTELIGENTE (90°)
+       ======================================================== */
+    .modal-fullscreen {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.92);
-      z-index: 500;
-      padding: 16px;
-      align-items: center;
-      justify-content: center;
+      background: #090D16;
+      z-index: 9999;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      touch-action: none;
+      user-select: none;
     }
-    .modal.active { display: flex; }
-    .modal-box {
-      max-width: 95vw;
-      max-height: 92vh;
+    .modal-fullscreen.active {
       display: flex;
       flex-direction: column;
-      position: relative;
     }
-    .modal-close-btn {
+
+    /* Floating Top Toolbar */
+    .viewer-toolbar {
       position: absolute;
-      top: -45px;
+      top: 0;
+      left: 0;
       right: 0;
-      background: white;
-      color: black;
+      z-index: 10002;
+      background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+      padding: 12px 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+    }
+
+    .viewer-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #E2E8F0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 60vw;
+    }
+
+    .viewer-close-btn {
+      background: rgba(255,255,255,0.25);
       border: none;
-      width: 36px;
-      height: 36px;
+      color: white;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       font-size: 1.4rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s;
     }
-    .modal-box img {
-      max-width: 100%;
-      max-height: 85vh;
-      object-fit: contain;
-      border-radius: 10px;
+    .viewer-close-btn:hover { background: rgba(255,255,255,0.4); }
+
+    /* Floating Bottom Action Bar for Zoom & Rotation */
+    .viewer-bottom-bar {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10002;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 35px;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
 
-    /* Footer */
+    .viewer-btn {
+      background: transparent;
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .viewer-btn:hover, .viewer-btn:active {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .viewer-btn.active-rotate {
+      background: #10B981;
+      color: white;
+    }
+
+    /* Notification / Rotation Hint Badge */
+    .viewer-hint {
+      position: absolute;
+      top: 55px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10001;
+      background: rgba(16, 185, 129, 0.95);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      pointer-events: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: opacity 0.5s;
+    }
+
+    /* Image Canvas Container */
+    .viewer-stage {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .viewer-img-container {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-origin: center center;
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      cursor: grab;
+    }
+    .viewer-img-container:active { cursor: grabbing; }
+
+    .viewer-img {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      pointer-events: auto;
+      border-radius: 6px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    }
+
     .official-footer {
       text-align: center;
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       color: var(--text-muted);
-      margin-top: 30px;
-      padding: 16px;
-      line-height: 1.6;
+      margin-top: 24px;
+      padding: 12px;
+      line-height: 1.5;
     }
 
-    @media (max-width: 520px) {
-      .tree-photo-container { height: 240px; }
-      .tree-name { font-size: 1.8rem; }
-      .scientific-name { font-size: 1.15rem; }
+    @media (max-width: 480px) {
+      .main-container { margin: 10px auto; padding: 0 10px; }
+      .tree-photo-container { height: 230px; }
+      .tree-name { font-size: 1.6rem; }
+      .scientific-name { font-size: 1.05rem; }
       .info-grid { grid-template-columns: 1fr; }
-      .tab-btn { font-size: 0.78rem; padding: 8px 10px; }
+      .tab-btn { font-size: 0.75rem; padding: 8px 4px; }
+      .viewer-bottom-bar { gap: 4px; padding: 4px 8px; }
+      .viewer-btn { font-size: 0.75rem; padding: 6px 8px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Institutional Top Header -->
+  <!-- Top Institutional Bar -->
   <header class="top-bar">
     <a href="index.html" class="top-bar-brand">
       <div class="flag-pill">
@@ -635,12 +777,12 @@
       </div>
       <div class="top-bar-title">
         <h1>Alcaldía de Jipijapa</h1>
-        <p>Patrimonio Natural y Especies Arbóreas</p>
+        <p>Catálogo de Especies Arbóreas</p>
       </div>
     </a>
     <a href="index.html" class="btn-gallery-back">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
-      Ver Galería
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+      Galería
     </a>
   </header>
 
@@ -648,75 +790,72 @@
 
     <!-- Loading -->
     <div id="loading" style="text-align:center; padding: 60px 20px;">
-      <div style="font-size: 1.2rem; font-weight:700; color: var(--primary);">Cargando ficha del árbol...</div>
+      <div style="font-size: 1.1rem; font-weight:700; color: var(--primary);">Cargando ficha del árbol...</div>
     </div>
 
     <div id="treeContent" style="display:none;">
 
-      <!-- View Selector Tabs: Ficha Oficial vs Resumen Digital -->
+      <!-- Responsive Tabs -->
       <div class="tab-switcher">
         <button id="tabFichaOficial" class="tab-btn active">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-          Ficha Oficial Escaneada
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Ficha Oficial
         </button>
         <button id="tabFichaResumen" class="tab-btn">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          Ficha Móvil Interactiva
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          Modo Móvil
         </button>
       </div>
 
-      <!-- VIEW 1: FICHA OFICIAL ESCANEADA (ORIGINAL DOCUMENT) -->
+      <!-- VISTA 1: FICHA OFICIAL ESCANEADA -->
       <section id="viewOfficialDoc" class="card official-doc-view">
         <div class="official-doc-header">
           <span class="doc-badge-pill" id="docBadgeCode">Árbol N° 001</span>
           <h2 class="official-doc-title" id="docCommonTitle">Árbol de la salchichas</h2>
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:2px;">Documento Técnico Original del GAD Municipal de Jipijapa</p>
+          <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Documento Técnico Original • GAD Jipijapa</p>
         </div>
 
-        <div class="official-img-wrapper">
-          <img id="imgOfficialSheet" class="official-sheet-img" src="" alt="Ficha Oficial Escaneada" title="Toca para ampliar en pantalla completa">
+        <div class="official-img-wrapper" id="btnWrapperZoom">
+          <img id="imgOfficialSheet" class="official-sheet-img" src="" alt="Ficha Oficial Escaneada">
+          <div class="hint-tap-zoom">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+            Toca para rotar y ver en grande
+          </div>
         </div>
 
         <div class="doc-actions-row">
           <button id="btnZoomDoc" class="btn-doc-action primary">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
-            Ver en Pantalla Completa
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+            Ver en Pantalla Completa (Girar)
           </button>
-          <a id="btnDownloadDoc" class="btn-doc-action" download="ficha_oficial.jpg" href="#">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-            Descargar Documento
-          </a>
           <button id="btnSwitchToMobile" class="btn-doc-action">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
             Ver en Modo Móvil
           </button>
         </div>
       </section>
 
-      <!-- VIEW 2: FICHA RESUMEN INTERACTIVA (FOTO + DATOS + AUDIO) -->
+      <!-- VISTA 2: FICHA RESUMEN INTERACTIVA -->
       <section id="viewInteractiveMobile" class="card" style="display:none;">
         
-        <!-- Hero Tree Photo -->
         <div class="tree-photo-container">
           <img id="treeImg" class="tree-photo" src="" alt="Fotografía del árbol">
           <div id="treeCodeBadge" class="badge-code">ÁRBOL N° 000</div>
           <div id="treeOriginBadge" class="badge-origin origin-introducida">Introducida</div>
           <button id="btnSwitchToDocFromPill" class="btn-view-ficha-pill">
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-            Ver Ficha Oficial
+            Ficha Oficial
           </button>
         </div>
 
         <div class="card-body">
 
-          <!-- Title Group -->
           <div class="tree-title-group">
             <span class="label-common-name">Nombre Común</span>
             <h2 id="treeCommonName" class="tree-name">Nombre</h2>
             <p id="treeSciName" class="scientific-name">Nombre científico</p>
           </div>
 
-          <!-- Audio Button -->
           <div class="audio-action-container">
             <button id="btnAudioGuide" class="btn-audio">
               <svg id="audioIcon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
@@ -724,11 +863,10 @@
             </button>
           </div>
 
-          <!-- Botanical & Technical Grid -->
           <div class="info-grid">
             <div class="info-item">
               <div class="info-item-label">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                 Familia Botánica
               </div>
               <div id="treeFamily" class="info-item-value">-</div>
@@ -736,7 +874,7 @@
 
             <div class="info-item">
               <div class="info-item-label">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg>
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg>
                 Altura Estimada
               </div>
               <div id="treeHeight" class="info-item-value">-</div>
@@ -744,7 +882,7 @@
 
             <div class="info-item">
               <div class="info-item-label">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
                 Zona de Origen
               </div>
               <div id="treeOrigin" class="info-item-value">-</div>
@@ -752,41 +890,38 @@
 
             <div class="info-item">
               <div class="info-item-label">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 Estado Fitosanitario
               </div>
               <div class="info-item-value"><span id="treeHealth" class="health-pill">Bueno</span></div>
             </div>
           </div>
 
-          <!-- Ecological Importance -->
           <div class="description-box">
             <h3>
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
-              Importancia Ecológica y Características
+              <svg width="15" height="15" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+              Importancia Ecológica
             </h3>
             <p id="treeDescription">Descripción...</p>
           </div>
 
-          <!-- Location Box -->
           <div class="location-box">
             <div class="location-header">
               <div class="location-title">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                 Ubicación en el Cantón
               </div>
-              <span id="treeLocation" style="font-weight:700; font-size:0.85rem; color:#1E3A8A;">Parque Central de Jipijapa</span>
+              <span id="treeLocation" style="font-weight:700; font-size:0.8rem; color:#1E3A8A;">Parque Central de Jipijapa</span>
             </div>
-            <div style="font-size:0.8rem; color:#3B82F6;">
-              <strong>Coordenadas UTM (Zona 17S):</strong> X: <span id="treeUtmX">-</span> | Y: <span id="treeUtmY">-</span>
+            <div style="font-size:0.75rem; color:#3B82F6;">
+              <strong>Coordenadas UTM:</strong> X: <span id="treeUtmX">-</span> | Y: <span id="treeUtmY">-</span>
             </div>
             <a id="btnMapLink" class="btn-maps" target="_blank" rel="noopener" href="#">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
-              Abrir Ubicación en Google Maps
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+              Ver en Google Maps
             </a>
           </div>
 
-          <!-- Technical Signature -->
           <div class="responsible-box">
             <strong>Responsables del levantamiento técnico:</strong><br>
             <span id="treeResponsible">Ing. Mgs Henry Leonardo Quimiz Castro - Lesly María Reyes Barcia</span>
@@ -795,10 +930,10 @@
         </div>
       </section>
 
-      <!-- Navigation Between Trees -->
+      <!-- Navigation -->
       <div class="nav-container">
         <div class="tree-select-wrap">
-          <label for="treeSelectQuick">Saltar a otro árbol:</label>
+          <label for="treeSelectQuick">Saltar a:</label>
           <select id="treeSelectQuick" class="tree-select">
             <!-- Injected via JS -->
           </select>
@@ -821,17 +956,57 @@
     <!-- Official Footer -->
     <footer class="official-footer">
       <p><strong>Gobierno Autónomo Descentralizado Municipal del Cantón Jipijapa</strong></p>
-      <p>Catálogo Digital de Especies Arbóreas • Jipijapa Verde</p>
+      <p>Catálogo Digital de Especies Arbóreas • Manabí, Ecuador</p>
     </footer>
 
   </main>
 
-  <!-- Fullscreen Modal for Zooming Original Sheet -->
-  <div id="zoomModal" class="modal">
-    <div class="modal-box">
-      <button id="zoomClose" class="modal-close-btn">&times;</button>
-      <img id="zoomModalImg" src="" alt="Ficha ampliada">
+  <!-- ========================================================
+       MODAL DE PANTALLA COMPLETA CON ROTACIÓN INTELIGENTE (90°)
+       ======================================================== -->
+  <div id="fullscreenModal" class="modal-fullscreen">
+    
+    <!-- Top Bar -->
+    <div class="viewer-toolbar">
+      <div class="viewer-title" id="viewerTitle">Ficha Oficial</div>
+      <button id="viewerCloseBtn" class="viewer-close-btn" title="Cerrar">&times;</button>
     </div>
+
+    <!-- Hint alert -->
+    <div id="viewerHint" class="viewer-hint">
+      🔄 Girado horizontalmente para ver en grande
+    </div>
+
+    <!-- Canvas Stage -->
+    <div class="viewer-stage" id="viewerStage">
+      <div class="viewer-img-container" id="viewerImgContainer">
+        <img id="viewerImg" class="viewer-img" src="" alt="Ficha ampliada">
+      </div>
+    </div>
+
+    <!-- Bottom Controls -->
+    <div class="viewer-bottom-bar">
+      <button id="btnToggleRotate" class="viewer-btn active-rotate" title="Girar orientación">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        <span id="rotateBtnLabel">Horizontal (90°)</span>
+      </button>
+
+      <button id="btnZoomIn" class="viewer-btn" title="Acercar">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+        Zoom +
+      </button>
+
+      <button id="btnZoomOut" class="viewer-btn" title="Alejar">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 12H4"/></svg>
+        Zoom -
+      </button>
+
+      <button id="btnResetView" class="viewer-btn" title="Restablecer">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+        Ajustar
+      </button>
+    </div>
+
   </div>
 
   <script>
@@ -839,6 +1014,14 @@
     let currentArbol = null;
     let synth = window.speechSynthesis;
     let isSpeaking = false;
+
+    // Fullscreen viewer transformation state
+    let isRotated = false;
+    let scale = 1;
+    let posX = 0;
+    let posY = 0;
+    let isDragging = false;
+    let startX, startY;
 
     function utmToLatLon(easting, northing) {
       const e = parseFloat(easting) || 546800;
@@ -866,7 +1049,7 @@
       arboles.forEach(a => {
         const opt = document.createElement('option');
         opt.value = a.id;
-        opt.textContent = `#${a.codigo} - ${a.nombreComun} (${a.nombreCientifico})`;
+        opt.textContent = `#${a.codigo} - ${a.nombreComun}`;
         select.appendChild(opt);
       });
       select.addEventListener('change', (e) => {
@@ -890,15 +1073,14 @@
 
       document.title = `${arbol.nombreComun} (#${arbol.codigo}) - GAD Municipal Jipijapa`;
 
-      // Document View Elements
+      // Official Document View
       document.getElementById('docBadgeCode').textContent = `ÁRBOL N° ${arbol.codigo}`;
       document.getElementById('docCommonTitle').textContent = `${arbol.nombreComun} (${arbol.nombreCientifico})`;
       document.getElementById('imgOfficialSheet').src = arbol.imagenFicha;
-      document.getElementById('btnDownloadDoc').href = arbol.imagenFicha;
-      document.getElementById('btnDownloadDoc').download = `ficha_oficial_${arbol.codigo}_${arbol.nombreComun}.jpg`;
-      document.getElementById('zoomModalImg').src = arbol.imagenFicha;
+      document.getElementById('viewerImg').src = arbol.imagenFicha;
+      document.getElementById('viewerTitle').textContent = `#${arbol.codigo} - ${arbol.nombreComun}`;
 
-      // Interactive Mobile View Elements
+      // Interactive Mobile View
       document.getElementById('treeImg').src = arbol.fotoArbol || arbol.imagenFicha;
       document.getElementById('treeCodeBadge').textContent = `ÁRBOL N° ${arbol.codigo}`;
 
@@ -935,7 +1117,7 @@
       document.getElementById('btnNext').innerHTML = `#${nextTree.codigo} ${nextTree.nombreComun} <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>`;
     }
 
-    // Tab Switching Logic
+    // Tab Switching
     const tabOfficial = document.getElementById('tabFichaOficial');
     const tabMobile = document.getElementById('tabFichaResumen');
     const viewOfficial = document.getElementById('viewOfficialDoc');
@@ -946,7 +1128,7 @@
       tabMobile.classList.remove('active');
       viewOfficial.style.display = 'block';
       viewMobile.style.display = 'none';
-      window.scrollTo({ top: 120, behavior: 'smooth' });
+      window.scrollTo({ top: 80, behavior: 'smooth' });
     }
 
     function showMobile() {
@@ -954,7 +1136,7 @@
       tabOfficial.classList.remove('active');
       viewMobile.style.display = 'block';
       viewOfficial.style.display = 'none';
-      window.scrollTo({ top: 120, behavior: 'smooth' });
+      window.scrollTo({ top: 80, behavior: 'smooth' });
     }
 
     tabOfficial.addEventListener('click', showOfficial);
@@ -962,19 +1144,157 @@
     document.getElementById('btnSwitchToMobile').addEventListener('click', showMobile);
     document.getElementById('btnSwitchToDocFromPill').addEventListener('click', showOfficial);
 
-    // Zoom Fullscreen Modal
-    const zoomModal = document.getElementById('zoomModal');
-    const openZoom = () => zoomModal.classList.add('active');
-    const closeZoom = () => zoomModal.classList.remove('active');
+    // ========================================================
+    // LOGICA DEL VISOR PANTALLA COMPLETA CON ROTACIÓN 90°
+    // ========================================================
+    const modal = document.getElementById('fullscreenModal');
+    const container = document.getElementById('viewerImgContainer');
+    const viewerImg = document.getElementById('viewerImg');
+    const btnRotate = document.getElementById('btnToggleRotate');
+    const rotateLabel = document.getElementById('rotateBtnLabel');
+    const hint = document.getElementById('viewerHint');
 
-    document.getElementById('btnZoomDoc').addEventListener('click', openZoom);
-    document.getElementById('imgOfficialSheet').addEventListener('click', openZoom);
-    document.getElementById('zoomClose').addEventListener('click', closeZoom);
-    zoomModal.addEventListener('click', (e) => {
-      if (e.target === zoomModal) closeZoom();
+    function updateTransform() {
+      const rot = isRotated ? 90 : 0;
+      
+      if (isRotated) {
+        // En rotación de 90° en móvil vertical, adaptamos las dimensiones para que el largo de la imagen
+        // aproveche el alto de la pantalla del teléfono:
+        const screenW = window.innerWidth;
+        const screenH = window.innerHeight;
+        // La imagen rotada 90° tiene ancho visual = su alto original, y alto visual = su ancho original.
+        // Factor de escala base para que llene la pantalla en vertical:
+        const baseRatio = Math.min((screenH * 0.95) / (viewerImg.naturalWidth || 2339), (screenW * 0.95) / (viewerImg.naturalHeight || 1654));
+        const finalScale = scale * (baseRatio > 0 ? (baseRatio * 2.4) : 1.4);
+        container.style.transform = `translate(${posX}px, ${posY}px) rotate(90deg) scale(${finalScale})`;
+      } else {
+        container.style.transform = `translate(${posX}px, ${posY}px) rotate(0deg) scale(${scale})`;
+      }
+    }
+
+    function openFullscreen() {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      // Si la pantalla está en vertical (como cualquier celular normal: alto > ancho)
+      // activamos AUTOMÁTICAMENTE la rotación a 90° para que la ficha horizontal
+      // se vea gigante y legible aprovechando todo el largo del teléfono:
+      const isPortrait = window.innerHeight > window.innerWidth;
+      isRotated = isPortrait;
+      scale = 1;
+      posX = 0;
+      posY = 0;
+
+      updateRotateButtonUI();
+      updateTransform();
+
+      // Mostrar pista y ocultarla después de 3.5 segundos
+      hint.style.display = 'block';
+      hint.style.opacity = '1';
+      setTimeout(() => {
+        hint.style.opacity = '0';
+        setTimeout(() => { hint.style.display = 'none'; }, 500);
+      }, 3500);
+    }
+
+    function closeFullscreen() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function updateRotateButtonUI() {
+      if (isRotated) {
+        btnRotate.classList.add('active-rotate');
+        rotateLabel.textContent = "Girar Vertical";
+      } else {
+        btnRotate.classList.remove('active-rotate');
+        rotateLabel.textContent = "Girar Horizontal";
+      }
+    }
+
+    // Botón de alternar rotación manual
+    btnRotate.addEventListener('click', (e) => {
+      e.stopPropagation();
+      isRotated = !isRotated;
+      scale = 1;
+      posX = 0;
+      posY = 0;
+      updateRotateButtonUI();
+      updateTransform();
     });
 
-    // Audio Guide (Web Speech API)
+    // Zoom In
+    document.getElementById('btnZoomIn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      scale = Math.min(scale + 0.35, 4.0);
+      updateTransform();
+    });
+
+    // Zoom Out
+    document.getElementById('btnZoomOut').addEventListener('click', (e) => {
+      e.stopPropagation();
+      scale = Math.max(scale - 0.35, 0.6);
+      updateTransform();
+    });
+
+    // Reset View
+    document.getElementById('btnResetView').addEventListener('click', (e) => {
+      e.stopPropagation();
+      scale = 1;
+      posX = 0;
+      posY = 0;
+      updateTransform();
+    });
+
+    // Triggers para abrir el visor
+    document.getElementById('btnZoomDoc').addEventListener('click', openFullscreen);
+    document.getElementById('btnWrapperZoom').addEventListener('click', openFullscreen);
+    document.getElementById('viewerCloseBtn').addEventListener('click', closeFullscreen);
+
+    // Gestos táctiles de arrastre (Pan)
+    const stage = document.getElementById('viewerStage');
+    
+    stage.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX - posX;
+      startY = e.clientY - posY;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      posX = e.clientX - startX;
+      posY = e.clientY - startY;
+      updateTransform();
+    });
+
+    window.addEventListener('mouseup', () => { isDragging = false; });
+
+    // Touch events para móviles
+    stage.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        startX = e.touches[0].clientX - posX;
+        startY = e.touches[0].clientY - posY;
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!isDragging || e.touches.length !== 1) return;
+      posX = e.touches[0].clientX - startX;
+      posY = e.touches[0].clientY - startY;
+      updateTransform();
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => { isDragging = false; });
+
+    // Si el usuario gira físicamente el teléfono, reajustar automáticamente
+    window.addEventListener('resize', () => {
+      if (modal.classList.contains('active')) {
+        updateTransform();
+      }
+    });
+
+    // Audioguía
     const btnAudio = document.getElementById('btnAudioGuide');
     const audioText = document.getElementById('audioText');
 
@@ -990,7 +1310,7 @@
       }
 
       if ('speechSynthesis' in window) {
-        const textToSpeak = `Ficha informativa del Árbol número ${currentArbol.codigo}. Nombre común: ${currentArbol.nombreComun}. Nombre científico: ${currentArbol.nombreCientifico}. Pertenece a la familia botánica ${currentArbol.familia}. ${currentArbol.descripcion}. Su altura aproximada es de ${currentArbol.altura}, con un estado fitosanitario ${currentArbol.estado}. Se encuentra ubicado en el ${currentArbol.ubicacion}.`;
+        const textToSpeak = `Ficha informativa del Árbol número ${currentArbol.codigo}. Nombre común: ${currentArbol.nombreComun}. Nombre científico: ${currentArbol.nombreCientifico}. Pertenece a la familia botánica ${currentArbol.familia}. ${currentArbol.descripcion}. Su altura aproximada es de ${currentArbol.altura}, con un estado fitosanitario ${currentArbol.estado}. Ubicado en el ${currentArbol.ubicacion}.`;
         
         const utterance = new SpeechSynthesisUtterance(textToSpeak);
         utterance.lang = 'es-ES';
