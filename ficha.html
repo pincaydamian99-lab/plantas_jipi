@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ficha Informativa Arbórea - GAD Municipal de Jipijapa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #007A3D;
+      --primary-dark: #005A2C;
+      --primary-light: #E8F5E9;
+      --secondary: #E31837;
+      --accent: #F59E0B;
+      --text-dark: #0F172A;
+      --text-muted: #64748B;
+      --bg-body: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --border-color: #E2E8F0;
+      --shadow: 0 10px 25px -5px rgba(0, 122, 61, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      --radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: var(--bg-body);
+      color: var(--text-dark);
+      line-height: 1.5;
+      padding-bottom: 50px;
+    }
+
+    /* Top Institutional Bar */
+    .top-bar {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .top-bar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .flag-pill {
+      display: flex;
+      height: 24px;
+      width: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      flex-direction: column;
+    }
+    .flag-green { background: #007A3D; flex: 1; }
+    .flag-red { background: #E31837; flex: 1; }
+
+    .top-bar-title h1 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .top-bar-title p {
+      font-size: 0.72rem;
+      opacity: 0.9;
+      color: #FDE047;
+      font-weight: 600;
+    }
+
+    .btn-index {
+      background: rgba(255,255,255,0.18);
+      color: white;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: background 0.2s;
+    }
+    .btn-index:hover { background: rgba(255,255,255,0.28); }
+
+    .main-container {
+      max-width: 680px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    /* Main Card */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    /* Hero Photo */
+    .tree-photo-container {
+      position: relative;
+      width: 100%;
+      height: 280px;
+      background: #E2E8F0;
+      overflow: hidden;
+    }
+
+    .tree-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .badge-code {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .badge-origin {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .origin-nativa { background: #22C55E; color: white; }
+    .origin-introducida { background: #3B82F6; color: white; }
+
+    .btn-view-ficha-thumb {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      background: rgba(255,255,255,0.95);
+      color: var(--primary-dark);
+      padding: 7px 14px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      border: none;
+    }
+
+    /* Content Area */
+    .card-body {
+      padding: 24px;
+    }
+
+    .tree-title-group {
+      text-align: center;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #F1F5F9;
+      padding-bottom: 18px;
+    }
+
+    .label-common-name {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+    }
+
+    .tree-name {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .scientific-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--text-muted);
+    }
+
+    /* Audio Player Pill */
+    .audio-action-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+
+    .btn-audio {
+      background: linear-gradient(135deg, #10B981, #059669);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+      transition: all 0.2s;
+    }
+    .btn-audio:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+    }
+    .btn-audio.playing {
+      background: linear-gradient(135deg, #EF4444, #DC2626);
+      box-shadow: 0 6px 16px rgba(239, 68, 68, 0.3);
+    }
+
+    /* Info Grid */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .info-item {
+      background: #F8FAFC;
+      border: 1px solid var(--border-color);
+      padding: 14px 16px;
+      border-radius: 14px;
+    }
+
+    .info-item-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .info-item-value {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      word-break: break-word;
+    }
+
+    .health-pill {
+      display: inline-block;
+      background: #DCFCE7;
+      color: #15803D;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+
+    /* Description Box */
+    .description-box {
+      background: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 22px;
+      color: #166534;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .description-box h3 {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+      font-weight: 800;
+      color: #15803D;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Location & Map Section */
+    .location-box {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .location-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .location-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #1E40AF;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-maps {
+      background: #2563EB;
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .btn-maps:hover { background: #1D4ED8; }
+
+    /* Action Buttons */
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .btn-action {
+      background: white;
+      color: var(--text-dark);
+      border: 1.5px solid var(--border-color);
+      padding: 12px;
+      border-radius: 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .btn-action:hover {
+      background: #F8FAFC;
+      border-color: #94A3B8;
+    }
+
+    /* Modal for Full Official Ficha */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 200;
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(5px);
+    }
+    .modal.active { display: flex; }
+
+    .modal-content {
+      position: relative;
+      max-width: 95vw;
+      max-height: 90vh;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      padding: 14px 20px;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .modal-close {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-img-wrap {
+      overflow: auto;
+      max-height: calc(90vh - 60px);
+      background: #1E293B;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .modal-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* Prev / Next Nav */
+    .nav-trees {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .nav-btn {
+      flex: 1;
+      padding: 12px;
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .nav-btn:hover { background: #F1F5F9; }
+
+    /* Footer info */
+    .official-footer {
+      text-align: center;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 24px;
+      padding: 16px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 480px) {
+      .tree-photo-container { height: 230px; }
+      .tree-name { font-size: 1.7rem; }
+      .scientific-name { font-size: 1.1rem; }
+      .info-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="top-bar-brand">
+      <div class="flag-pill">
+        <div class="flag-green"></div>
+        <div class="flag-red"></div>
+      </div>
+      <div class="top-bar-title">
+        <h1>Alcaldía de Jipijapa</h1>
+        <p>Catálogo de Especies Arbóreas</p>
+      </div>
+    </div>
+    <a href="index.html" class="btn-index">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      Ver Catálogo
+    </a>
+  </header>
+
+  <main class="main-container">
+
+    <!-- Loading State -->
+    <div id="loading" style="text-align:center; padding: 60px 20px;">
+      <div style="font-size: 1.2rem; font-weight:700; color: var(--primary);">Cargando ficha del árbol...</div>
+    </div>
+
+    <!-- Tree Card View -->
+    <div id="treeCard" class="card" style="display:none;">
+      
+      <!-- Tree Image -->
+      <div class="tree-photo-container">
+        <img id="treeImg" class="tree-photo" src="" alt="Fotografía del árbol">
+        <div id="treeCodeBadge" class="badge-code">ÁRBOL N° 000</div>
+        <div id="treeOriginBadge" class="badge-origin origin-introducida">Introducida</div>
+        <button id="btnOpenFicha" class="btn-view-ficha-thumb">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          Ficha Oficial
+        </button>
+      </div>
+
+      <!-- Card Body -->
+      <div class="card-body">
+
+        <!-- Title / Header -->
+        <div class="tree-title-group">
+          <span class="label-common-name">Nombre Común</span>
+          <h2 id="treeCommonName" class="tree-name">Nombre</h2>
+          <p id="treeSciName" class="scientific-name">Nombre científico</p>
+        </div>
+
+        <!-- Audio Player Button -->
+        <div class="audio-action-container">
+          <button id="btnAudioGuide" class="btn-audio">
+            <svg id="audioIcon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+            <span id="audioText">Escuchar Ficha en Audio</span>
+          </button>
+        </div>
+
+        <!-- Botanical & Technical Grid -->
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-item-label">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+              Familia Botánica
+            </div>
+            <div id="treeFamily" class="info-item-value">-</div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-item-label">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg>
+              Altura Estimada
+            </div>
+            <div id="treeHeight" class="info-item-value">-</div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-item-label">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
+              Zona de Origen
+            </div>
+            <div id="treeOrigin" class="info-item-value">-</div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-item-label">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Estado Fitosanitario
+            </div>
+            <div class="info-item-value"><span id="treeHealth" class="health-pill">Bueno</span></div>
+          </div>
+        </div>
+
+        <!-- Description Box -->
+        <div class="description-box">
+          <h3>
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+            Importancia Ecológica y Características
+          </h3>
+          <p id="treeDescription">Descripción del árbol...</p>
+        </div>
+
+        <!-- Location Box -->
+        <div class="location-box">
+          <div class="location-header">
+            <div class="location-title">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              Ubicación en el Cantón
+            </div>
+            <span id="treeLocation" style="font-weight:700; font-size:0.85rem; color:#1E3A8A;">Parque Central de Jipijapa</span>
+          </div>
+          <div style="font-size:0.8rem; color:#3B82F6;">
+            <strong>Coordenadas UTM (Zona 17S):</strong> X: <span id="treeUtmX">-</span> | Y: <span id="treeUtmY">-</span>
+          </div>
+          <a id="btnMapLink" class="btn-maps" target="_blank" rel="noopener" href="#">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+            Abrir Ubicación en Google Maps
+          </a>
+        </div>
+
+        <!-- Technical Responsibles -->
+        <div style="font-size:0.75rem; color:var(--text-muted); background:#F8FAFC; border:1px solid var(--border-color); padding:10px 14px; border-radius:10px; margin-bottom:20px;">
+          <strong>Responsables del levantamiento:</strong><br>
+          <span id="treeResponsible">Ing. Mgs Henry Leonardo Quimiz Castro - Lesly María Reyes Barcia</span>
+        </div>
+
+        <!-- Action Row -->
+        <div class="action-row">
+          <button id="btnVerFichaModal" class="btn-action">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            Ver Certificado Original
+          </button>
+          <button id="btnShare" class="btn-action">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+            Compartir Ficha
+          </button>
+        </div>
+
+        <!-- Prev / Next Navigation -->
+        <div class="nav-trees">
+          <a id="btnPrev" class="nav-btn" href="#">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+            Árbol Anterior
+          </a>
+          <a id="btnNext" class="nav-btn" href="#">
+            Siguiente Árbol
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Official Footer -->
+    <footer class="official-footer">
+      <p><strong>Gobierno Autónomo Descentralizado Municipal del Cantón Jipijapa</strong></p>
+      <p>Iniciativa de Código QR Permanente y Digitalización del Arbolado Urbano</p>
+      <p style="margin-top:6px; opacity:0.8;">Jipijapa, Manabí, Ecuador</p>
+    </footer>
+
+  </main>
+
+  <!-- Modal for Full Original Certificate Ficha -->
+  <div id="fichaModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span id="modalTitle">Ficha Oficial Informativa</span>
+        <button id="modalClose" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-img-wrap">
+        <img id="modalFichaImg" class="modal-img" src="" alt="Ficha técnica completa">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let arboles = [];
+    let currentArbol = null;
+    let synth = window.speechSynthesis;
+    let isSpeaking = false;
+
+    // UTM 17S approximation for Jipijapa Central Park
+    // Reference point: UTM 546800, 9850950 -> approx -1.3496, -80.5794
+    function utmToLatLon(easting, northing) {
+      const e = parseFloat(easting) || 546800;
+      const n = parseFloat(northing) || 9850950;
+      const dE = (e - 546800) * 0.000009;
+      const dN = (n - 9850950) * 0.000009;
+      const lat = -1.34968 + dN;
+      const lon = -80.57948 + dE;
+      return { lat, lon };
+    }
+
+    async function init() {
+      try {
+        const res = await fetch('data/arboles.json');
+        arboles = await res.json();
+      } catch (err) {
+        console.error("Error al cargar arboles.json:", err);
+        document.getElementById('loading').innerHTML = '<div style="color:red; font-weight:bold;">Error cargando datos. Revisa la conexión.</div>';
+        return;
+      }
+
+      // Read tree ID from query param, e.g. ?id=003
+      const urlParams = new URLSearchParams(window.location.search);
+      let treeId = urlParams.get('id') || '003';
+
+      currentArbol = arboles.find(a => a.id === treeId || a.codigo === treeId);
+      if (!currentArbol) {
+        currentArbol = arboles[0];
+      }
+
+      renderTree(currentArbol);
+    }
+
+    function renderTree(arbol) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('treeCard').style.display = 'block';
+
+      // Page Title
+      document.title = `${arbol.nombreComun} (#${arbol.codigo}) - Árboles de Jipijapa`;
+
+      // Photo and Badges
+      const imgElem = document.getElementById('treeImg');
+      imgElem.src = arbol.fotoArbol || arbol.imagenFicha;
+      document.getElementById('treeCodeBadge').textContent = `ÁRBOL N° ${arbol.codigo}`;
+
+      const originBadge = document.getElementById('treeOriginBadge');
+      originBadge.textContent = arbol.tipoOrigen;
+      originBadge.className = `badge-origin ${arbol.tipoOrigen.toLowerCase() === 'nativa' ? 'origin-nativa' : 'origin-introducida'}`;
+
+      // Names
+      document.getElementById('treeCommonName').textContent = arbol.nombreComun;
+      document.getElementById('treeSciName').textContent = arbol.nombreCientifico;
+
+      // Grid Info
+      document.getElementById('treeFamily').textContent = arbol.familia;
+      document.getElementById('treeHeight').textContent = arbol.altura;
+      document.getElementById('treeOrigin').textContent = arbol.origen;
+      document.getElementById('treeHealth').textContent = arbol.estado;
+      document.getElementById('treeDescription').textContent = arbol.descripcion;
+
+      // Location & Maps
+      document.getElementById('treeLocation').textContent = arbol.ubicacion;
+      document.getElementById('treeUtmX').textContent = arbol.utmX;
+      document.getElementById('treeUtmY').textContent = arbol.utmY;
+      document.getElementById('treeResponsible').textContent = arbol.responsable;
+
+      const coords = utmToLatLon(arbol.utmX, arbol.utmY);
+      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${coords.lat.toFixed(6)},${coords.lon.toFixed(6)}`;
+      document.getElementById('btnMapLink').href = mapsUrl;
+
+      // Modal Image setup
+      document.getElementById('modalFichaImg').src = arbol.imagenFicha;
+      document.getElementById('modalTitle').textContent = `Ficha Oficial #${arbol.codigo} - ${arbol.nombreComun}`;
+
+      // Prev / Next Navigation
+      const currentIndex = arboles.findIndex(a => a.codigo === arbol.codigo);
+      const prevTree = arboles[(currentIndex - 1 + arboles.length) % arboles.length];
+      const nextTree = arboles[(currentIndex + 1) % arboles.length];
+
+      document.getElementById('btnPrev').href = `ficha.html?id=${prevTree.id}`;
+      document.getElementById('btnPrev').innerHTML = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg> #${prevTree.codigo} ${prevTree.nombreComun}`;
+      
+      document.getElementById('btnNext').href = `ficha.html?id=${nextTree.id}`;
+      document.getElementById('btnNext').innerHTML = `#${nextTree.codigo} ${nextTree.nombreComun} <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>`;
+    }
+
+    // Modal Events
+    const modal = document.getElementById('fichaModal');
+    const openModal = () => modal.classList.add('active');
+    const closeModal = () => modal.classList.remove('active');
+
+    document.getElementById('btnOpenFicha').addEventListener('click', openModal);
+    document.getElementById('btnVerFichaModal').addEventListener('click', openModal);
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // Audio Guide (Web Speech API)
+    const btnAudio = document.getElementById('btnAudioGuide');
+    const audioText = document.getElementById('audioText');
+
+    btnAudio.addEventListener('click', () => {
+      if (!currentArbol) return;
+
+      if (isSpeaking) {
+        synth.cancel();
+        isSpeaking = false;
+        btnAudio.classList.remove('playing');
+        audioText.textContent = "Escuchar Ficha en Audio";
+        return;
+      }
+
+      if ('speechSynthesis' in window) {
+        const textToSpeak = `Ficha informativa del Árbol número ${currentArbol.codigo}. Nombre común: ${currentArbol.nombreComun}. Nombre científico: ${currentArbol.nombreCientifico}. Pertenece a la familia botánica ${currentArbol.familia}. ${currentArbol.descripcion}. Su altura aproximada es de ${currentArbol.altura}, con un estado fitosanitario ${currentArbol.estado}. Se encuentra ubicado en el ${currentArbol.ubicacion}.`;
+        
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.lang = 'es-ES';
+        utterance.rate = 0.95;
+
+        utterance.onend = () => {
+          isSpeaking = false;
+          btnAudio.classList.remove('playing');
+          audioText.textContent = "Escuchar Ficha en Audio";
+        };
+
+        utterance.onerror = () => {
+          isSpeaking = false;
+          btnAudio.classList.remove('playing');
+          audioText.textContent = "Escuchar Ficha en Audio";
+        };
+
+        synth.speak(utterance);
+        isSpeaking = true;
+        btnAudio.classList.add('playing');
+        audioText.textContent = "Detener Narración";
+      } else {
+        alert("Tu navegador no soporta síntesis de voz.");
+      }
+    });
+
+    // Share Button
+    document.getElementById('btnShare').addEventListener('click', async () => {
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: `Árbol ${currentArbol.nombreComun} - Jipijapa`,
+            text: `Conoce la ficha técnica del árbol ${currentArbol.nombreComun} (#${currentArbol.codigo}) en el Parque Central de Jipijapa.`,
+            url: window.location.href,
+          });
+        } catch (err) {}
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert("Enlace copiado al portapapeles: " + window.location.href);
+      }
+    });
+
+    init();
+  </script>
+</body>
+</html>

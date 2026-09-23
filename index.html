@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de QR y Fichas Arbóreas - GAD Cantón Jipijapa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+  <!-- QRCode.js for instant client-side QR re-generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- JSZip for 1-click download all in zip -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <style>
+    :root {
+      --primary: #007A3D;
+      --primary-dark: #005A2C;
+      --primary-light: #E8F5E9;
+      --secondary: #E31837;
+      --accent: #F59E0B;
+      --text-dark: #0F172A;
+      --text-muted: #64748B;
+      --bg-body: #F1F5F9;
+      --card-bg: #FFFFFF;
+      --border-color: #E2E8F0;
+      --shadow: 0 10px 25px -5px rgba(0, 122, 61, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: var(--bg-body);
+      color: var(--text-dark);
+      line-height: 1.5;
+      padding-bottom: 60px;
+    }
+
+    /* Hero Header */
+    .hero {
+      background: linear-gradient(135deg, #007A3D 0%, #004D26 100%);
+      color: white;
+      padding: 40px 20px 30px;
+      border-bottom: 5px solid var(--secondary);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hero-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-badge {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #FDE047;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: #E2FBE8;
+      max-width: 750px;
+      line-height: 1.6;
+    }
+
+    /* Permanent QR Notice Banner */
+    .notice-banner {
+      background: #ECFDF5;
+      border: 1.5px solid #10B981;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-top: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: #065F46;
+      font-size: 0.9rem;
+    }
+    .notice-banner strong { color: #047857; }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 25px auto;
+      padding: 0 16px;
+    }
+
+    /* Control Panel Card */
+    .control-panel {
+      background: white;
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow);
+      margin-bottom: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .url-config-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .url-config-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .url-input-wrap {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .url-input {
+      flex: 1;
+      min-width: 280px;
+      padding: 12px 16px;
+      border: 2px solid var(--border-color);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      font-family: monospace;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .url-input:focus { border-color: var(--primary); }
+
+    .btn-control {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .btn-control:hover { background: var(--primary-dark); }
+
+    .btn-secondary {
+      background: white;
+      color: var(--text-dark);
+      border: 2px solid var(--border-color);
+    }
+    .btn-secondary:hover {
+      background: #F8FAFC;
+      border-color: #94A3B8;
+    }
+
+    .btn-pdf {
+      background: #DC2626;
+      color: white;
+    }
+    .btn-pdf:hover { background: #B91C1C; }
+
+    /* Filters and Search */
+    .search-filter-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 250px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 16px 10px 38px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .search-box input:focus { border-color: var(--primary); }
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      background: #F1F5F9;
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    .filter-pill.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Stats Row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .stat-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    /* Grid of Tree Plaque Cards */
+    .tree-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    /* Printable Plaque Card Component */
+    .plaque-card {
+      background: white;
+      border-radius: 18px;
+      border: 2px solid var(--primary);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .plaque-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 30px rgba(0, 122, 61, 0.12);
+    }
+
+    /* Plaque Header */
+    .plaque-header {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 12px 14px;
+      position: relative;
+    }
+    .plaque-header-red-stripe {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--secondary);
+    }
+    .plaque-header h4 {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .plaque-header p {
+      font-size: 0.65rem;
+      color: #E2FBE8;
+    }
+
+    .plaque-tree-badge {
+      display: inline-block;
+      margin: 10px auto 4px;
+      background: #F0FDF4;
+      color: #15803D;
+      border: 1.5px solid #16A34A;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    /* Plaque QR and Photo section */
+    .plaque-visual-row {
+      display: flex;
+      padding: 12px 16px;
+      gap: 14px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .plaque-qr-box {
+      width: 145px;
+      height: 145px;
+      background: white;
+      border: 2px solid #CBD5E1;
+      border-radius: 12px;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .plaque-qr-box img {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    .plaque-photo-box {
+      width: 145px;
+      height: 145px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1.5px solid var(--border-color);
+      background: #E2E8F0;
+    }
+    .plaque-photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Plaque Label Below QR - THE MAIN USER REQUIREMENT */
+    .plaque-info-below {
+      text-align: center;
+      padding: 8px 18px 14px;
+      background: #FAFAFA;
+      border-top: 1px solid #F1F5F9;
+      flex: 1;
+    }
+
+    .label-nombre-comun {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .plaque-common-name {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.2;
+      margin: 2px 0 4px;
+      text-transform: uppercase;
+    }
+
+    .plaque-sci-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .plaque-meta-pill {
+      display: inline-block;
+      font-size: 0.72rem;
+      color: #475569;
+      background: #E2E8F0;
+      padding: 2px 10px;
+      border-radius: 12px;
+      margin: 2px 0;
+    }
+
+    .plaque-scan-instruction {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #16A34A;
+      margin-top: 8px;
+    }
+
+    /* Card Action Buttons */
+    .plaque-card-footer {
+      padding: 12px 16px;
+      background: white;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-card-action {
+      flex: 1;
+      padding: 9px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-view-ficha {
+      background: var(--primary);
+      color: white;
+      border: none;
+    }
+    .btn-view-ficha:hover { background: var(--primary-dark); }
+
+    .btn-dl-png {
+      background: white;
+      color: var(--text-dark);
+      border: 1px solid var(--border-color);
+    }
+    .btn-dl-png:hover { background: #F1F5F9; }
+
+    /* Modal for Image Preview */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 500;
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.active { display: flex; }
+    .modal-box {
+      max-width: 900px;
+      max-height: 90vh;
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-img-container {
+      overflow: auto;
+      background: #0F172A;
+      padding: 10px;
+    }
+    .modal-img-container img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* PRINT STYLES FOR HIGH-RESOLUTION PHYSICAL PLAQUES */
+    @media print {
+      body { background: white; padding: 0; }
+      .hero, .control-panel, .stats-row, .plaque-card-footer, .search-filter-row { display: none !important; }
+      .container { max-width: 100%; margin: 0; padding: 0; }
+      .tree-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15mm;
+        page-break-inside: auto;
+      }
+      .plaque-card {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 2px solid #007A3D !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .plaque-qr-box {
+        width: 180px !important;
+        height: 180px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Header -->
+  <header class="hero">
+    <div class="hero-container">
+      <div class="hero-badge-row">
+        <span class="hero-badge">GAD Cantón Jipijapa</span>
+        <span class="hero-badge" style="background:#E31837; color:white;">Patrimonio Natural</span>
+      </div>
+      <h1 class="hero-title">Generador de Códigos QR para Árboles</h1>
+      <p class="hero-subtitle">
+        Generación de códigos QR <strong>permanentes (sin caducidad)</strong> con placas identificativas impresas que muestran el <strong>Nombre Común</strong> justo debajo del código, enlazando directamente a la ficha digital interactiva de cada especie.
+      </p>
+
+      <div class="notice-banner">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        <div>
+          <strong>Garantía de Código QR Permanente:</strong> Estos códigos QR son estáticos y apuntan de manera directa al repositorio en <strong>GitHub Pages</strong>. No dependen de plataformas intermediarias de pago que vencen a los 14 días. Funcionarán para siempre y sin límite de escaneos.
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Control Panel -->
+    <section class="control-panel">
+      <div class="url-config-group">
+        <label class="url-config-label">
+          <span>Dirección Web de Destino (URL Base de las Fichas):</span>
+          <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">Al escanear el QR, el teléfono abrirá esta URL + ?id=XXX</span>
+        </label>
+        <div class="url-input-wrap">
+          <input type="text" id="baseUrlInput" class="url-input" value="https://pincaydamian99-lab.github.io/plantas_jipi/ficha.html?id=">
+          <button id="btnUpdateUrl" class="btn-control">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            Actualizar QRs
+          </button>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button id="btnPrintAll" class="btn-control btn-secondary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+          Imprimir Placas (Navegador)
+        </button>
+
+        <a href="qrs_generados/placas_imprimibles_jipijapa.pdf" download="placas_imprimibles_jipijapa.pdf" class="btn-control btn-pdf">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Descargar PDF Imprimible (300 DPI)
+        </a>
+
+        <button id="btnZipAll" class="btn-control btn-secondary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          Descargar Todas en ZIP
+        </button>
+      </div>
+
+      <!-- Search & Filters -->
+      <div class="search-filter-row">
+        <div class="search-box">
+          <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" id="searchInput" placeholder="Buscar por nombre común (ej. Nin), científico o código...">
+        </div>
+
+        <div class="filter-pills">
+          <button class="filter-pill active" data-filter="all">Todos (20)</button>
+          <button class="filter-pill" data-filter="nin">Nin (6)</button>
+          <button class="filter-pill" data-filter="nativa">Nativas</button>
+          <button class="filter-pill" data-filter="introducida">Introducidas</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Row -->
+    <section class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon">🌳</div>
+        <div>
+          <div class="stat-number" id="statTotal">20</div>
+          <div class="stat-label">Árboles Registrados</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📱</div>
+        <div>
+          <div class="stat-number">20</div>
+          <div class="stat-label">Placas QR Generadas</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏛️</div>
+        <div>
+          <div class="stat-number">Jipijapa</div>
+          <div class="stat-label">Parque Central</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">♾️</div>
+        <div>
+          <div class="stat-number">Permanente</div>
+          <div class="stat-label">Sin Caducidad</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tree Grid -->
+    <div id="treeGrid" class="tree-grid">
+      <!-- Injected via JavaScript -->
+    </div>
+
+  </main>
+
+  <!-- Modal for high res original scan -->
+  <div id="imageModal" class="modal">
+    <div class="modal-box">
+      <div style="background:var(--primary); color:white; padding:12px 18px; display:flex; justify-content:space-between; align-items:center;">
+        <span id="modalImageTitle" style="font-weight:700;">Ficha Oficial</span>
+        <button id="modalImageClose" style="background:none; border:none; color:white; font-size:1.4rem; cursor:pointer;">&times;</button>
+      </div>
+      <div class="modal-img-container">
+        <img id="modalImg" src="" alt="Ficha completa">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let arboles = [];
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    const treeGrid = document.getElementById('treeGrid');
+    const baseUrlInput = document.getElementById('baseUrlInput');
+    const searchInput = document.getElementById('searchInput');
+
+    async function loadData() {
+      try {
+        const res = await fetch('data/arboles.json');
+        arboles = await res.json();
+        renderGrid();
+      } catch (err) {
+        console.error("Error al cargar datos:", err);
+      }
+    }
+
+    function renderGrid() {
+      treeGrid.innerHTML = '';
+      const baseUrl = baseUrlInput.value.trim();
+
+      const filtered = arboles.filter(a => {
+        // Search filter
+        const q = currentSearch.toLowerCase();
+        const matchSearch = !q || 
+          a.nombreComun.toLowerCase().includes(q) ||
+          a.nombreCientifico.toLowerCase().includes(q) ||
+          a.codigo.toLowerCase().includes(q) ||
+          a.familia.toLowerCase().includes(q);
+
+        // Category filter
+        let matchCategory = true;
+        if (currentFilter === 'nin') {
+          matchCategory = a.nombreComun.toLowerCase().includes('nin');
+        } else if (currentFilter === 'nativa') {
+          matchCategory = a.tipoOrigen.toLowerCase() === 'nativa';
+        } else if (currentFilter === 'introducida') {
+          matchCategory = a.tipoOrigen.toLowerCase() === 'introducida';
+        }
+
+        return matchSearch && matchCategory;
+      });
+
+      document.getElementById('statTotal').textContent = filtered.length;
+
+      filtered.forEach(arbol => {
+        const fullUrl = `${baseUrl}${arbol.id}`;
+        const card = document.createElement('div');
+        card.className = 'plaque-card';
+
+        // High res generated image path from backend script
+        const slug = arbol.nombreComun.toLowerCase().replace(/á/g, 'a').replace(/é/g, 'e').replace(/í/g, 'i').replace(/ó/g, 'o').replace(/ú/g, 'u').replace(/ñ/g, 'n').replace(/[^a-z0-9]/g, '_').replace(/__+/g, '_');
+        const pregeneratedPlaque = `qrs_generados/placa_${arbol.codigo}_${slug}.png`;
+
+        card.innerHTML = `
+          <!-- Header institucional -->
+          <div class="plaque-header">
+            <h4>GAD Municipal del Cantón Jipijapa</h4>
+            <p>Ficha Informativa de la Especie Arbórea</p>
+            <div class="plaque-header-red-stripe"></div>
+          </div>
+
+          <!-- Badge número de árbol -->
+          <div style="text-align:center;">
+            <div class="plaque-tree-badge">ÁRBOL N° ${arbol.codigo}</div>
+          </div>
+
+          <!-- Fila con QR Code y Fotografía real del árbol -->
+          <div class="plaque-visual-row">
+            <div class="plaque-qr-box" id="qr-box-${arbol.codigo}"></div>
+            <div class="plaque-photo-box" title="Fotografía de la especie">
+              <img src="${arbol.fotoArbol || arbol.imagenFicha}" alt="Foto árbol ${arbol.nombreComun}">
+            </div>
+          </div>
+
+          <!-- BLOQUE DE TEXTO DEBAJO DEL QR (NOMBRE COMUN: NIN) -->
+          <div class="plaque-info-below">
+            <div class="label-nombre-comun">NOMBRE COMÚN</div>
+            <div class="plaque-common-name">${arbol.nombreComun}</div>
+            <div class="plaque-sci-name">${arbol.nombreCientifico}</div>
+            <div class="plaque-meta-pill">Familia: ${arbol.familia}</div>
+            <div class="plaque-meta-pill">Altura: ${arbol.altura}</div>
+            <div class="plaque-scan-instruction">📱 Escanea con tu celular para ver la ficha</div>
+          </div>
+
+          <!-- Botones de Acción -->
+          <div class="plaque-card-footer">
+            <a href="ficha.html?id=${arbol.id}" target="_blank" class="btn-card-action btn-view-ficha">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              Ver Ficha Digital
+            </a>
+            <a href="${pregeneratedPlaque}" download="placa_${arbol.codigo}_${arbol.nombreComun}.png" class="btn-card-action btn-dl-png" title="Descargar placa en alta resolución">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Placa PNG
+            </a>
+          </div>
+        `;
+
+        treeGrid.appendChild(card);
+
+        // Generate the crisp live QR inside the box
+        const qrContainer = document.getElementById(`qr-box-${arbol.codigo}`);
+        new QRCode(qrContainer, {
+          text: fullUrl,
+          width: 130,
+          height: 130,
+          colorDark: "#0F172A",
+          colorLight: "#FFFFFF",
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      });
+    }
+
+    // Events
+    document.getElementById('btnUpdateUrl').addEventListener('click', () => {
+      renderGrid();
+      alert("¡Códigos QR actualizados con la nueva URL!");
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      currentSearch = e.target.value;
+      renderGrid();
+    });
+
+    document.querySelectorAll('.filter-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        renderGrid();
+      });
+    });
+
+    document.getElementById('btnPrintAll').addEventListener('click', () => {
+      window.print();
+    });
+
+    // ZIP generator for all plaques
+    document.getElementById('btnZipAll').addEventListener('click', async () => {
+      const btn = document.getElementById('btnZipAll');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = "Generando ZIP...";
+      btn.disabled = true;
+
+      try {
+        const zip = new JSZip();
+        const folder = zip.folder("placas_qr_jipijapa");
+
+        // Fetch each pregenerated plaque and add to zip
+        for (const a of arboles) {
+          const slug = a.nombreComun.toLowerCase().replace(/á/g, 'a').replace(/é/g, 'e').replace(/í/g, 'i').replace(/ó/g, 'o').replace(/ú/g, 'u').replace(/ñ/g, 'n').replace(/[^a-z0-9]/g, '_').replace(/__+/g, '_');
+          const path = `qrs_generados/placa_${a.codigo}_${slug}.png`;
+          try {
+            const resp = await fetch(path);
+            const blob = await resp.blob();
+            folder.file(`placa_${a.codigo}_${slug}.png`, blob);
+          } catch (e) {
+            console.error("No se pudo cargar placa:", path);
+          }
+        }
+
+        const content = await zip.generateAsync({ type: "blob" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(content);
+        link.download = "placas_arboles_jipijapa_qrs.zip";
+        link.click();
+      } catch (err) {
+        alert("Error al comprimir: " + err);
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    });
+
+    loadData();
+  </script>
+</body>
+</html>
